@@ -262,14 +262,33 @@ end
 
 local function CreateModule(name)
 	local newmodule = Module:Clone()
-	newmodule.Name = name
+	newmodule.Name = "   " .. name
 	newmodule.Text = name
 	newmodule.Parent = Main
 end
 
-CreateModule("   ClanDetector")
-CreateModule("   SweatDetector")
-CreateModule("   CustomAnimations")
+CreateModule("ClanDetector")
+CreateModule("SweatDetector")
+CreateModule("CustomAnimations")
+
+if ScriptSettings.SweatDetector == true then
+	for i, v in pairs(players:GetPlayers()) do
+		local sweat = false
+		if isAlive(v) then
+			for i2, v2 in pairs(v.Character:GetChildren()) do
+				if v2:IsA("Accessory") and string.find(v2.Name:lower(), "tanqr") then
+					sweat = true
+				end
+			end
+			if v.Character.Animate.run.RunAnim.AnimationId == "http://www.roblox.com/asset/?id=507767714" then
+				sweat = true
+			end
+		end
+		if sweat == true then
+			CreateNotification("Sweat Detector", "There is a sweat (" .. v.DisplayName .. ") on " .. tostring(v.TeamColor) .. " team!")
+		end
+	end
+end
 
 for i, v in pairs(Main:GetChildren()) do
 	if v:IsA("TextButton") then
@@ -281,6 +300,8 @@ for i, v in pairs(Main:GetChildren()) do
 					ScriptSettings.CustomAnimations = true
 					task.wait(0.03)
 					if isAlive() then lplr.Character.Humanoid.Jump = true end
+				elseif v.Text == "   SweatDetector" then
+					ScriptSettings.SweatDetector = true
 				end
 				SaveSettings()
 			else
@@ -290,6 +311,8 @@ for i, v in pairs(Main:GetChildren()) do
 					ScriptSettings.CustomAnimations = false
 					task.wait(0.03)
 					if isAlive() then lplr.Character.Humanoid.Jump = true end
+				elseif v.Text == "   SweatDetector" then
+					ScriptSettings.SweatDetector = false
 				end
 				SaveSettings()
 			end
@@ -380,29 +403,33 @@ task.spawn(function()
 							end
 							tab.AddMessageToChannel = function(Self2, MessageData)
 								if MessageData.FromSpeaker and players[MessageData.FromSpeaker] then
-									if players[MessageData.FromSpeaker].UserId == 1451596734 then
-										MessageData.ExtraData = {
-											NameColor = players[MessageData.FromSpeaker].Team == nil and Color3.new(0, 1, 1) or players[MessageData.FromSpeaker].TeamColor.Color,
-											Tags = {
-												table.unpack(MessageData.ExtraData.Tags),
-												{
-													TagColor = Color3.new(1, 0.3, 0.3),
-													TagText = "CAPE OWNER"
+									for i2, v2 in pairs(a) do
+										if players[MessageData.FromSpeaker].UserId == v2 then
+											MessageData.ExtraData = {
+												NameColor = players[MessageData.FromSpeaker].Team == nil and Color3.new(0, 1, 1) or players[MessageData.FromSpeaker].TeamColor.Color,
+												Tags = {
+													table.unpack(MessageData.ExtraData.Tags),
+													{
+														TagColor = Color3.new(1, 0.3, 0.3),
+														TagText = "CAPE OWNER"
+													}
 												}
 											}
-										}
+										end
 									end
-									if players[MessageData.FromSpeaker].UserId == 562994998 then
-										MessageData.ExtraData = {
-											NameColor = players[MessageData.FromSpeaker].Team == nil and Color3.new(0, 1, 1) or players[MessageData.FromSpeaker].TeamColor.Color,
-											Tags = {
-												table.unpack(MessageData.ExtraData.Tags),
-												{
-													TagColor = Color3.new(0.7, 0, 1),
-													TagText = "CAPE PRIVATE"
+									for i2, v2 in pairs(b) do
+										if players[MessageData.FromSpeaker].UserId == v2 then
+											MessageData.ExtraData = {
+												NameColor = players[MessageData.FromSpeaker].Team == nil and Color3.new(0, 1, 1) or players[MessageData.FromSpeaker].TeamColor.Color,
+												Tags = {
+													table.unpack(MessageData.ExtraData.Tags),
+													{
+														TagColor = Color3.new(0.7, 0, 1),
+														TagText = "CAPE PRIVATE"
+													}
 												}
 											}
-										}
+										end
 									end
 								end
 								return addmessage(Self2, MessageData)
