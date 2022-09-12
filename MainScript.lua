@@ -263,7 +263,7 @@ end
 local function CreateModule(name)
 	local newmodule = Module:Clone()
 	newmodule.Name = "   " .. name
-	newmodule.Text = name
+	newmodule.Text = "   " .. name
 	newmodule.Parent = Main
 end
 
