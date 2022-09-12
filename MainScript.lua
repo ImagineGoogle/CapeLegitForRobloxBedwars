@@ -376,6 +376,7 @@ for i, v in pairs(Main:GetChildren()) do
 				elseif v.Text == "   SweatDetector" then
 					ScriptSettings.SweatDetector = true
 				elseif v.Text == "   Cape" then
+					ScriptSettings.Cape = true
 					local torso
 					if lplr.Character:FindFirstChild("Torso") then
 						torso = lplr.Character.Torso
@@ -437,6 +438,7 @@ for i, v in pairs(Main:GetChildren()) do
 				elseif v.Text == "   SweatDetector" then
 					ScriptSettings.SweatDetector = false
 				elseif v.Text == "   Cape" then
+					ScriptSettings.Cape = false
 					if isAlive() then
 						pcall(function()
 							lplr.Character.Cape:Destroy()
