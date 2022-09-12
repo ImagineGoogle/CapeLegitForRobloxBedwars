@@ -26,6 +26,9 @@ local function LoadSettings()
 	local HttpService = game:GetService("HttpService")
 	if (readfile and isfile and betterisfile(file)) then
 		ScriptSettings = HttpService:JSONDecode(readfile(file))
+		for i, v in pairs(ScriptSettings) do
+			print(i, v)
+		end
 	end
 end
 
