@@ -280,9 +280,11 @@ if ScriptSettings.SweatDetector == true then
 					sweat = true
 				end
 			end
-			if v.Character.Animate.run.RunAnim.AnimationId == "http://www.roblox.com/asset/?id=507767714" then
-				sweat = true
-			end
+			pcall(function()
+				if v.Character.Animate.run.RunAnim.AnimationId == "http://www.roblox.com/asset/?id=507767714" then
+					sweat = true
+				end
+			end)
 		end
 		if sweat == true then
 			CreateNotification("Sweat Detector", "There is a sweat (" .. v.DisplayName .. ") on " .. tostring(v.TeamColor) or "nil" .. " team!")
