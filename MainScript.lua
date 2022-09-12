@@ -83,7 +83,7 @@ ClickGui.Size = UDim2.new(1, 0, 1, 0)
 ClickGui.Visible = false
 
 Notifications.Name = "Notifications"
-Notifications.Parent = ClickGui
+Notifications.Parent = Cape
 Notifications.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Notifications.BackgroundTransparency = 1.000
 Notifications.Size = UDim2.new(1, 0, 0.99000001, 0)
@@ -222,6 +222,7 @@ local function isAlive(plr)
 end
 
 local NotifTable = {}
+local AlreadyDetected = {}
 
 local function ToggleGui()
 	if ClickGui.Visible == true then
@@ -252,8 +253,8 @@ local function CreateNotification(title, text, module)
 		notif.Parent = Notifications
 		notif.LayoutOrder = #NotifTable + 1
 		notif.MainNotif.Title.Text = title
-		notif.MainNotif.Text.Text = Text
-		task.wait(1)
+		notif.MainNotif.Text.Text = text
+		task.wait(2)
 
 		table.remove(NotifTable, tnumber)
 		notif:Destroy()
@@ -291,7 +292,10 @@ local function CheckForSweats()
 					end)
 				end
 				if sweat == true then
-					CreateNotification("Sweat Detector", "There is a sweat (" .. tostring(v.DisplayName) .. ") on " .. tostring(v.TeamColor) .. " team!", "SweatDetector")
+					if AlreadyDetected[v.Name] == nil then
+						CreateNotification("Sweat Detector", "There is a sweat (" .. v.DisplayName .. ") on " .. tostring(v.TeamColor) .. " team!", "SweatDetector")
+						table.insert(AlreadyDetected, v.Name)
+					end
 				end
 			end
 		end
