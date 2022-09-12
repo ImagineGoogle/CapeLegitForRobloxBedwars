@@ -354,6 +354,7 @@ local function CheckForSweats()
 end
 
 CheckForSweats()
+CheckForClanNames()
 
 for i, v in pairs(Main:GetChildren()) do
 	if v:IsA("TextButton") then
@@ -489,7 +490,7 @@ UIS.InputBegan:Connect(function(i, gpe)
 	end
 end)
 
-players.PlayerAdded:Connect(CheckForSweats)
+players.PlayerAdded:Connect(CheckForSweats, CheckForClanNames)
 
 task.spawn(function()
 	local a = {
