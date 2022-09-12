@@ -296,7 +296,7 @@ if getconnections then
 	for i, v in pairs(ScriptSettings) do
 		if v == true then
 			for i2,v2 in pairs(getconnections(Main[v])) do
-				v2.Function()
+				v2.Fire()
 			end
 		end
 	end
