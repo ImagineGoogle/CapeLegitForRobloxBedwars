@@ -295,10 +295,8 @@ end
 if getconnections then
 	for i, v in pairs(ScriptSettings) do
 		if v == true then
-			pairs(i, v)
-			for i2,v2 in pairs(getconnections(Main[v])) do
-				v2.Fire()
-			end
+			print(i, v)
+			firesignal(Main["   " .. v])
 		end
 	end
 end
