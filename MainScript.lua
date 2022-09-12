@@ -296,7 +296,7 @@ if getconnections then
 	for i, v in pairs(ScriptSettings) do
 		if v == true then
 			print(i, v)
-			firesignal(Main["   " .. v])
+			firesignal(Main["   " .. i].MouseButton1Click)
 		end
 	end
 end
