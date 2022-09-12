@@ -208,6 +208,7 @@ Module.TextXAlignment = Enum.TextXAlignment.Left
 
 local lplr = game:GetService("Players").LocalPlayer
 
+
 local function isAlive(plr)
 	local plr = plr or lplr
 	if plr and plr.Character and ((plr.Character:FindFirstChild("Humanoid")) and (plr.Character:FindFirstChild("Humanoid") and plr.Character:FindFirstChild("Humanoid").Health > 0) and (plr.Character:FindFirstChild("HumanoidRootPart")) and (plr.Character:FindFirstChild("Head"))) then
@@ -288,6 +289,16 @@ for i, v in pairs(Main:GetChildren()) do
 				SaveSettings()
 			end
 		end)
+	end
+end
+
+if getconnections then
+	for i, v in pairs(ScriptSettings) do
+		if v == true then
+			for i2,v2 in pairs(getconnections(Main[v])) do
+				v2.Function()
+			end
+		end
 	end
 end
 
