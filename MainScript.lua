@@ -371,7 +371,7 @@ end)
 Collapse.MouseButton1Click:Connect(CollapseFrame)
 
 UIS.InputBegan:Connect(function(i, gpe)
-	if i.KeyCode == Enum.KeyCode.Y then
+	if i.KeyCode == Enum.KeyCode.Y and not gpe then
 		ToggleGui()
 	end
 end)
