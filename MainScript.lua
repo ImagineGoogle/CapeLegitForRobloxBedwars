@@ -274,6 +274,52 @@ CreateModule("SweatDetector")
 CreateModule("CustomAnimations")
 CreateModule("Cape")
 
+local function CheckForClanNames()
+	task.spawn(function()
+		task.wait(1)
+		if ScriptSettings.ClanDetector == true then
+			local clans = {
+				"tnqr";
+				"sus";
+				"gdoggs";
+				"lz";
+				"mini";
+				"dv";
+				"tanqr";
+				"gw";
+				"uni";
+				"ips";
+				"lem";
+				"irz";
+				"imt";
+				"sv";
+				"ttg";
+				"ggez";
+				"va";
+				"rg";
+				"ffot";
+				"tap";
+				"c";
+				"trk";
+				"easy";
+				"typ";
+				
+				
+			}
+			for i, v in pairs(players:GetPlayers()) do
+				local inaclan = false
+				for i2, v2 in pairs(clans) do
+					if string.find(v.DisplayName:lower(), v2 .. "_") then
+						inaclan = true
+					end
+				end
+				if inaclan == true then
+					CreateNotification("Clan Detector", v.DisplayName .. " is in a clan!", "ClanDetector")
+				end
+			end
+		end
+	end)
+end
 
 local function CheckForSweats()
 	task.spawn(function()
