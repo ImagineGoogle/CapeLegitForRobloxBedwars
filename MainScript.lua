@@ -224,6 +224,7 @@ end
 
 local NotifTable = {}
 local AlreadyDetected = {}
+local AlreadyDetectedClan = {}
 
 local function ToggleGui()
 	if ClickGui.Visible == true then
@@ -314,7 +315,13 @@ local function CheckForClanNames()
 					end
 				end
 				if inaclan == true then
-					CreateNotification("Clan Detector", v.DisplayName .. " is in a clan!", "ClanDetector")
+					if not table.find(AlreadyDetectedClan, v.Name) then
+						print("not already detected! (clan)")
+						CreateNotification("Clan Detector", v.DisplayName .. " is in a clan!", "ClanDetector")
+						table.insert(AlreadyDetectedClan, v.Name)
+					else
+						print("already detected! (clan)")
+					end
 				end
 			end
 		end
