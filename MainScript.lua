@@ -291,7 +291,7 @@ local function CheckForSweats()
 					end)
 				end
 				if sweat == true then
-					CreateNotification("Sweat Detector", "There is a sweat (" .. v.DisplayName .. ")!", "SweatDetector")
+					CreateNotification("Sweat Detector", "There is a sweat (" .. tostring(v.DisplayName) .. ") on " .. tostring(v.TeamColor) .. " team!", "SweatDetector")
 				end
 			end
 		end
