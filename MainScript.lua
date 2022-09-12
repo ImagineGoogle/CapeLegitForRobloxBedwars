@@ -209,6 +209,8 @@ Module.TextColor3 = Color3.fromRGB(188, 188, 188)
 Module.TextSize = 19.000
 Module.TextXAlignment = Enum.TextXAlignment.Left
 
+LoadSettings()
+
 local lplr = game:GetService("Players").LocalPlayer
 
 
