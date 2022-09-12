@@ -415,6 +415,8 @@ for i, v in pairs(Main:GetChildren()) do
 							task.wait(0.1)
 						end
 					until not p or p.Parent ~= torso.Parent
+				elseif v.Text == "   ClanDetector" then
+					ScriptSettings.ClanDetector = true
 				end
 				SaveSettings()
 			else
@@ -432,6 +434,8 @@ for i, v in pairs(Main:GetChildren()) do
 							lplr.Character.Cape:Destroy()
 						end)
 					end
+				elseif v.Text == "   ClanDetector" then
+					ScriptSettings.ClanDetector = false
 				end
 				SaveSettings()
 			end
