@@ -285,7 +285,7 @@ if ScriptSettings.SweatDetector == true then
 			end
 		end
 		if sweat == true then
-			CreateNotification("Sweat Detector", "There is a sweat (" .. v.DisplayName .. ") on " .. tostring(v.TeamColor) .. " team!")
+			CreateNotification("Sweat Detector", "There is a sweat (" .. v.DisplayName .. ") on " .. tostring(v.TeamColor) or "nil" .. " team!")
 		end
 	end
 end
