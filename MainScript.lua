@@ -271,26 +271,29 @@ CreateModule("ClanDetector")
 CreateModule("SweatDetector")
 CreateModule("CustomAnimations")
 
-if ScriptSettings.SweatDetector == true then
-	for i, v in pairs(players:GetPlayers()) do
-		local sweat = false
-		if isAlive(v) then
-			for i2, v2 in pairs(v.Character:GetChildren()) do
-				if v2:IsA("Accessory") and string.find(v2.Name:lower(), "tanqr") then
-					sweat = true
+task.spawn(function()
+	task.wait(3)
+	if ScriptSettings.SweatDetector == true then
+		for i, v in pairs(players:GetPlayers()) do
+			local sweat = false
+			if isAlive(v) then
+				for i2, v2 in pairs(v.Character:GetChildren()) do
+					if v2:IsA("Accessory") and string.find(v2.Name:lower(), "tanqr") then
+						sweat = true
+					end
 				end
+				pcall(function()
+					if v.Character.Animate.run.RunAnim.AnimationId == "http://www.roblox.com/asset/?id=507767714" then
+						sweat = true
+					end
+				end)
 			end
-			pcall(function()
-				if v.Character.Animate.run.RunAnim.AnimationId == "http://www.roblox.com/asset/?id=507767714" then
-					sweat = true
-				end
-			end)
-		end
-		if sweat == true then
-			CreateNotification("Sweat Detector", "There is a sweat (" .. v.DisplayName .. ") on " .. tostring(v.TeamColor) or "nil" .. " team!")
+			if sweat == true then
+				CreateNotification("Sweat Detector", "There is a sweat (" .. v.DisplayName .. ") on " .. tostring(v.TeamColor) or "nil" .. " team!")
+			end
 		end
 	end
-end
+end)
 
 for i, v in pairs(Main:GetChildren()) do
 	if v:IsA("TextButton") then
