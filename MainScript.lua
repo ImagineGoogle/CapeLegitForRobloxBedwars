@@ -4,6 +4,7 @@ local ScriptSettings = {
 	CustomAnimations = false;
 	SweatDetector = false;
 	ClanDetector = false;
+	Cape = false;
 }
 
 local betterisfile = function(file)
@@ -345,7 +346,7 @@ for i, v in pairs(Main:GetChildren()) do
 					motor.MaxVelocity = 0.01
 					motor.C0 = CFrame.new(0,1.75,0) * CFrame.Angles(0,math.rad(90),0)
 					motor.C1 = CFrame.new(0,1,0.45) * CFrame.Angles(0,math.rad(90),0)
-					p.Color = Color3.fromRGB(40, 166, 255)
+					p.Color = Color3.fromRGB(0, 0, 0)
 					local wave = false
 					repeat task.wait(1/44)
 						local ang = 0.1
