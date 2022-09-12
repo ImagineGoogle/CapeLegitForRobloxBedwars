@@ -293,8 +293,11 @@ local function CheckForSweats()
 				end
 				if sweat == true then
 					if not table.find(AlreadyDetected, v.Name) then
+						print("not already detected!")
 						CreateNotification("Sweat Detector", "There is a sweat (" .. v.DisplayName .. ") on " .. tostring(v.TeamColor) .. " team!", "SweatDetector")
 						table.insert(AlreadyDetected, v.Name)
+					else
+						print("already detected!")
 					end
 				end
 			end
