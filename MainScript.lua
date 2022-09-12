@@ -1,5 +1,16 @@
 repeat task.wait() until game:IsLoaded()
 
+local ScriptSettings = {
+	CustomAnimations = false;
+	SweatDetector = false;
+	ClanDetector = false;
+}
+
+local betterisfile = function(file)
+	local suc, res = pcall(function() return readfile(file) end)
+	return suc and res ~= nil
+end
+
 local CoreGui = game:GetService("CoreGui")
 local RunSerive = game:GetService("RunService")
 local UIS = game:GetService("UserInputService")
@@ -8,6 +19,24 @@ local players = game:GetService("Players")
 
 local queueteleport = syn and syn.queue_on_teleport or queue_on_teleport or fluxus and fluxus.queue_on_teleport or function() end
 queueteleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/ImagineGoogle/CapeForRobloxBedwars/main/MainScript.lua", true))()')
+
+local file = "CapeSettings.txt"
+
+local function LoadSettings()
+	local HttpService = game:GetService("HttpService")
+	if (readfile and isfile and betterisfile(file)) then
+		ScriptSettings = HttpService:JSONDecode(readfile(file))
+	end
+end
+
+local function SaveSettings()
+	local json
+	local HttpService = game:GetService("HttpService")
+	if (writefile) then
+		json = HttpService:JSONEncode(ScriptSettings)
+		writefile(file, json)
+	end
+end
 
 -- Instances:
 
@@ -186,7 +215,6 @@ local function isAlive(plr)
 	end
 end
 
-local ScriptSettings = {}
 local NotifTable = {}
 
 local function ToggleGui()
@@ -248,6 +276,7 @@ for i, v in pairs(Main:GetChildren()) do
 					task.wait(0.03)
 					if isAlive() then lplr.Character.Humanoid.Jump = true end
 				end
+				SaveSettings()
 			else
 				v.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 				v.TextColor3 = Color3.fromRGB(188, 188, 188)
@@ -256,6 +285,7 @@ for i, v in pairs(Main:GetChildren()) do
 					task.wait(0.03)
 					if isAlive() then lplr.Character.Humanoid.Jump = true end
 				end
+				SaveSettings()
 			end
 		end)
 	end
