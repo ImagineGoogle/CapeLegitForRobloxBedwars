@@ -64,16 +64,24 @@ local Module = Instance.new("TextButton")
 --Properties:
 
 Cape.Name = "Cape"
-Cape.Parent = CoreGui
 Cape.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 Cape.DisplayOrder = 999999999
 Cape.OnTopOfCoreBlur = true
 
-for i, v in pairs(CoreGui:GetChildren()) do
-	if v:IsA("ScreenGui") then
-		v.OnTopOfCoreBlur = true
-	end
+if gethui and (not KRNL_LOADED) then
+	Cape.Parent = gethui()
+elseif not is_sirhurt_closure and syn and syn.protect_gui then
+	syn.protect_gui(Cape)
+	Cape.Parent = game:GetService("CoreGui")
+else
+	Cape.Parent = game:GetService("CoreGui")
 end
+
+--for i, v in pairs(CoreGui:GetChildren()) do
+--	if v:IsA("ScreenGui") then
+--		v.OnTopOfCoreBlur = true
+--	end
+--end
 
 ClickGui.Name = "ClickGui"
 ClickGui.Parent = Cape
