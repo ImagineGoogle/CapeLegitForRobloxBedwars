@@ -414,6 +414,7 @@ for i, v in pairs(Main:GetChildren()) do
 				elseif v.Text == "   ClanDetector" then
 					ScriptSettings.ClanDetector = true
 				elseif v.Text == "   LegitAntiVoid" then
+					print("anti void on!")
 					ScriptSettings.LegitAntiVoid = true
 					local part = Instance.new("Part")
 					part.Name = "CapeAntiVoid"
