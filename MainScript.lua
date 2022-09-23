@@ -432,6 +432,7 @@ for i, v in pairs(Main:GetChildren()) do
 					end
 					
 					part.Position = Vector3.new(0, pos, 0)
+					part.Parent = workspace
 					
 					part.Touched:Connect(AntiVoid)
 				end
