@@ -422,9 +422,11 @@ for i, v in pairs(Main:GetChildren()) do
 					part.Color = Color3.new(255, 255, 255)
 					part.Transparency = 0.8
 					local pos = 0
-					for i, v in pairs(workspace:GetChildren()) do
-						if v.Name == "bed" and v:IsA("MeshPart") then
+					for i, v in pairs(workspace:GetDescendants()) do
+						if v.Name == "bed" then
 							pos = v.Position.Y
+							print('yoooooooo its a bed')
+							print('new pos is ' .. pos)
 						end
 					end
 					
