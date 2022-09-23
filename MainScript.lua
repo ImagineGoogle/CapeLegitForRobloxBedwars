@@ -378,20 +378,24 @@ local function AntiVoid()
 	if antivoidcooldown == false then
 		antivoidcooldown = true
 		local timesPressed = 0
+		if setfpscap then
+			setfpscap(20)
+		end
 
 		while true do
 			if timesPressed >= 20 then
 				print("done!")
 				antivoidcooldown = false
+				setfpscap(1000)
 				break
 			end
 			game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.Two, false, game)
 			print("pressed 2")
-			task.wait(0.1)
+			task.wait(0.05)
 			game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.One, false, game)
 			print("pressed 1")
 			timesPressed += 1
-			task.wait(0.1)
+			task.wait(0.05)
 		end
 	end
 end
@@ -422,6 +426,7 @@ for i, v in pairs(Main:GetChildren()) do
 					part.Anchored = true
 					part.Color = Color3.new(255, 255, 255)
 					part.Transparency = 0.5
+					part.CanCollide = false
 					local pos = 0
 					for i, v in pairs(workspace:GetDescendants()) do
 						if v.Name == "bed" and v:IsA("MeshPart") then
