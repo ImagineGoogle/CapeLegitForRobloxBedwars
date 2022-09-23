@@ -421,11 +421,11 @@ for i, v in pairs(Main:GetChildren()) do
 					part.Size = Vector3.new(10000, 1, 10000)
 					part.Anchored = true
 					part.Color = Color3.new(255, 255, 255)
-					part.Transparency = 0
+					part.Transparency = 0.5
 					local pos = 0
 					for i, v in pairs(workspace:GetDescendants()) do
 						if v.Name == "bed" and v:IsA("MeshPart") then
-							pos = v.Position.Y
+							pos = v.Position.Y - 20
 							print('yoooooooo its a bed')
 							print('new pos is ' .. pos)
 						end
