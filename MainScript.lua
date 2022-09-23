@@ -391,11 +391,11 @@ local function AntiVoid()
 			end
 			game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.Two, false, game)
 			print("pressed 2")
-			task.wait(0.05)
+			task.wait(0.025)
 			game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.One, false, game)
 			print("pressed 1")
 			timesPressed += 1
-			task.wait(0.05)
+			task.wait(0.025)
 		end
 	end
 end
