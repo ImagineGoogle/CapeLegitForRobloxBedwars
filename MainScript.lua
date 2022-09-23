@@ -4,6 +4,7 @@ local ScriptSettings = {
 	CustomAnimations = false;
 	SweatDetector = false;
 	ClanDetector = false;
+	LegitAntiVoid = false;
 }
 
 local betterisfile = function(file)
@@ -280,6 +281,7 @@ end
 CreateModule("ClanDetector")
 CreateModule("SweatDetector")
 CreateModule("CustomAnimations")
+CreateModule("LegitAntiVoid")
 
 local function CheckForClanNames()
 	task.spawn(function()
@@ -336,6 +338,8 @@ local function CheckForClanNames()
 	end)
 end
 
+
+
 local function CheckForSweats()
 	task.spawn(function()
 		task.wait(2)
@@ -368,6 +372,30 @@ local function CheckForSweats()
 	end)
 end
 
+local antivoidcooldown = false
+
+local function AntiVoid()
+	if antivoidcooldown == false then
+		antivoidcooldown = true
+		local timesPressed = 0
+
+		while true do
+			if timesPressed >= 20 then
+				print("done!")
+				antivoidcooldown = false
+				break
+			end
+			game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.Two, false, game)
+			print("pressed 2")
+			task.wait(0.1)
+			game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.One, false, game)
+			print("pressed 1")
+			timesPressed += 1
+			task.wait(0.1)
+		end
+	end
+end
+
 CheckForSweats()
 CheckForClanNames()
 
@@ -385,6 +413,24 @@ for i, v in pairs(Main:GetChildren()) do
 					ScriptSettings.SweatDetector = true
 				elseif v.Text == "   ClanDetector" then
 					ScriptSettings.ClanDetector = true
+				elseif v.Text == "   LegitAntiVoid" then
+					ScriptSettings.LegitAntiVoid = true
+					local part = Instance.new("Part")
+					part.Name = "CapeAntiVoid"
+					part.Size = Vector3.new(10000, 1, 10000)
+					part.Anchored = true
+					part.Color = Color3.new(255, 255, 255)
+					part.Transparency = 0.8
+					local pos = 0
+					for i, v in pairs(workspace:GetChildren()) do
+						if v.Name == "bed" and v:IsA("MeshPart") then
+							pos = v.Position.Y
+						end
+					end
+					
+					part.Position = Vector3.new(0, pos, 0)
+					
+					part.Touched:Connect(AntiVoid)
 				end
 				SaveSettings()
 			else
@@ -398,6 +444,10 @@ for i, v in pairs(Main:GetChildren()) do
 					ScriptSettings.SweatDetector = false
 				elseif v.Text == "   ClanDetector" then
 					ScriptSettings.ClanDetector = false
+				elseif v.Text == "   LegitAntiVoid" then
+					pcall(function()
+						workspace.CapeAntiVoid:Destroy()
+					end)
 				end
 				SaveSettings()
 			end
