@@ -453,6 +453,7 @@ for i, v in pairs(Main:GetChildren()) do
 				elseif v.Text == "   ClanDetector" then
 					ScriptSettings.ClanDetector = false
 				elseif v.Text == "   LegitAntiVoid" then
+                    ScriptSettings.LegitAntiVoid = false
 					pcall(function()
 						workspace.CapeAntiVoid:Destroy()
 					end)
