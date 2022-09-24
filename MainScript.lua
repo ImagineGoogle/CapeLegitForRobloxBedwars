@@ -12,7 +12,6 @@ local betterisfile = function(file)
 	return suc and res ~= nil
 end
 
-local CoreGui = game:GetService("CoreGui")
 local RunSerive = game:GetService("RunService")
 local UIS = game:GetService("UserInputService")
 local repstorage = game:GetService("ReplicatedStorage")
@@ -109,7 +108,7 @@ Utility.AnchorPoint = Vector2.new(0.5, 0.5)
 Utility.BackgroundColor3 = Color3.fromRGB(29, 29, 29)
 Utility.BorderSizePixel = 0
 Utility.Position = UDim2.new(0.5, 0, 0.300000012, 0)
-Utility.Size = UDim2.new(0, 268, 0, 39)
+Utility.Size = UDim2.new(0, 268, 0, 50)
 Utility.Active = true
 Utility.Draggable = true
 
@@ -123,7 +122,7 @@ Main.BorderSizePixel = 0
 Main.Position = UDim2.new(1, 0, 0.997210443, 0)
 Main.Size = UDim2.new(1, 0,9.181, 0)
 Main.ScrollBarThickness = 0
-Main.Visible = false
+Main.Visible = true
 
 UIListLayout_2.Parent = Main
 UIListLayout_2.SortOrder = Enum.SortOrder.Name
@@ -135,7 +134,7 @@ Label.BackgroundTransparency = 1.000
 Label.Position = UDim2.new(0.0425531901, 0, 0, 0)
 Label.Size = UDim2.new(0.795744658, 0, 1, 0)
 Label.Font = Enum.Font.SourceSans
-Label.Text = "Utility"
+Label.Text = "CAPE"
 Label.TextColor3 = Color3.fromRGB(188, 188, 188)
 Label.TextSize = 24.000
 Label.TextXAlignment = Enum.TextXAlignment.Left
@@ -146,7 +145,7 @@ Collapse.AnchorPoint = Vector2.new(0, 0.5)
 Collapse.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Collapse.BackgroundTransparency = 1.000
 Collapse.Position = UDim2.new(0.893616974, 0, 0.5, 0)
-Collapse.Rotation = 90.000
+Collapse.Rotation = 270.000
 Collapse.Size = UDim2.new(0, 15, 0, 15)
 Collapse.Image = "rbxassetid://9388739304"
 Collapse.ImageColor3 = Color3.fromRGB(188, 188, 188)
@@ -473,7 +472,7 @@ if getconnections then
 	end
 end
 
-task.spawn(function()
+task.spawn(function() -- anims
 	while task.wait() do
 		pcall(function()
 			if ScriptSettings.CustomAnimations and ScriptSettings.CustomAnimations == true then
@@ -551,7 +550,7 @@ event.OnMessageDoneFiltering.OnClientEvent:Connect(function(object)
 	output(object.FromSpeaker, object.Message or "")
 end)
 
-task.spawn(function()
+task.spawn(function() -- chat tags
 
 
 	local function runcode(func)
