@@ -514,11 +514,8 @@ end)
 
 players.PlayerAdded:Connect(CheckForSweats, CheckForClanNames)
 
-local a = {
-	1451596734;
-	3752180075;
-	3846711055;
-	3866519161;
+local a = { -- owner
+	3928119454;
 }
 
 local b = {
