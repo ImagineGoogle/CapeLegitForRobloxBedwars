@@ -514,19 +514,13 @@ end)
 
 players.PlayerAdded:Connect(CheckForSweats, CheckForClanNames)
 
-local a = { -- owner
-	3928119454;
-}
-
-local b = {
-	562994998;
-}
+local whitelist = loadstring(game:HttpGet("https://raw.githubusercontent.com/ImagineGoogle/CapeForRobloxBedwars/main/List.lua", true))()
 
 local function output(plr, msg)
 	local player = game.Players[plr]
 	print("player chatted: " .. msg)
 	print(player.UserId)
-	for i, v in pairs(a) do
+	for i, v in pairs(whitelist.Owner) do
 		if player.UserId == v then
 			print("player is whitelisted")
 			--if player ~= lplr then
@@ -574,7 +568,7 @@ task.spawn(function() -- chat tags
 							end
 							tab.AddMessageToChannel = function(Self2, MessageData)
 								if MessageData.FromSpeaker and players[MessageData.FromSpeaker] then
-									for i2, v2 in pairs(a) do
+									for i2, v2 in pairs(whitelist.Owner) do
 										if players[MessageData.FromSpeaker].UserId == v2 then
 											MessageData.ExtraData = {
 												NameColor = players[MessageData.FromSpeaker].Team == nil and Color3.new(0, 1, 1) or players[MessageData.FromSpeaker].TeamColor.Color,
@@ -588,7 +582,7 @@ task.spawn(function() -- chat tags
 											}
 										end
 									end
-									for i2, v2 in pairs(b) do
+									for i2, v2 in pairs(whitelist.Special) do
 										if players[MessageData.FromSpeaker].UserId == v2 then
 											MessageData.ExtraData = {
 												NameColor = players[MessageData.FromSpeaker].Team == nil and Color3.new(0, 1, 1) or players[MessageData.FromSpeaker].TeamColor.Color,
