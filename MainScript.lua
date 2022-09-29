@@ -481,8 +481,8 @@ task.spawn(function() -- anims
 					local Animate = lplr.Character.Animate
 					Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=1083195517"
 					Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=1083214717"
-					Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=656121766"
-					Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=656118852"
+					Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=10921140719"
+					Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=10921135644"
 					Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=616008936"
 					Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=616005863"
 				end
